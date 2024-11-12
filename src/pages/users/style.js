@@ -2,18 +2,20 @@ import Styled from 'styled-components';
 
 const DataTableStyleWrap = Styled.div`
     .invoice-datatable-filter{
+        display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         margin: 20px 0 25px 0;
+        flex-direction: column;
         @media only screen and (max-width: 767px){
             flex-direction: column;
             align-items: flex-start;
         }
         .invoice-datatable-filter__left{
             display: inline-flex;
+            width: 100%;
             align-items: center;
-            flex-wrap: wrap;
             @media only screen and (max-width: 767px){
                 margin-bottom: 20px;
             }
@@ -51,9 +53,6 @@ const DataTableStyleWrap = Styled.div`
                     margin-bottom: 8px;
                     font-size: 14px;
                 }
-            }
-            .invoice-datatable-filter__action{
-                margin-top: 20px;
             }
         }
         .invoice-datatable-filter__right{
