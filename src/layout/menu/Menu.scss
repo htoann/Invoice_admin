@@ -1,0 +1,23 @@
+.menuItem-icon {
+  height: 34px;
+}
+
+.ant-layout-sider-children {
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    padding-left: 15px !important;
+  }
+  .ant-menu-item:has(.subMenu) {
+    padding-left: 45px !important;
+
+    a {
+      padding-left: 0 !important;
+    }
+  }
+
+  .subMenu {
+    .left-menu-navbar-title {
+      max-width: 175px;
+    }
+  }
+}
