@@ -16,6 +16,15 @@ export const API_INVOICES_CONNECT_AUTHORITY = '/invoice_credentials/ ';
 
 export const API_INVOICES_TAXES_NUMBER = '/invoices/nbmst/';
 
+// Mails
+export const API_MAILS_ACCOUNTS = '/mails/accounts/';
+
+export const API_MAILS_ACCOUNT_BY_ACCOUNT_ID = (accountId) => `/mails/accounts/${accountId}/`;
+
+export const API_INBOXES_BY_ACCOUNT_ID = (accountId) => `${API_MAILS_ACCOUNT_BY_ACCOUNT_ID(accountId)}inboxes/`;
+
+export const API_MAIL_TASK_HISTORIES = '/mails/histories/';
+
 // Products
 export const API_PRODUCTS = '/products/';
 
@@ -58,3 +67,7 @@ export const API_PROVINCES = '/locations/provinces';
 export const API_DISTRICTS = '/locations/districts';
 
 export const API_COMMUNES = '/locations/communes';
+
+// Report
+export const API_INVOICE_ADJUSTMENT = '/hdttdc_reports/';
+export const API_INVOICE_ADJUSTMENT_EXPORT = '/hdttdc_reports/excel/';
