@@ -1,25 +1,41 @@
 import { ModalCommon } from '@/components/ModalCommon';
-import { API_PRODUCT, dataService } from '@/service';
+import { API_PROVIDER, dataService } from '@/service';
 import { Form, notification } from 'antd';
-import { useState } from 'react';
+import { useAppState } from 'context/AppContext';
+import { useGetOrgStructure } from 'hooks/useGetOrgStructure';
+import { useDivision } from 'hooks/vietnam-division';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { fieldsModalProduct } from '../utils';
+import { fieldsModalProvider } from '../utils';
 
 const EditUser = ({ state, setState, list, setList }) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
+
+  useGetOrgStructure();
+
+  const { branches } = useAppState();
+
+  const defaultProvideId = state?.update?.province?.id;
+  const defaultDistrictId = state?.update?.district?.id;
+
   const [loading, setLoading] = useState(false);
 
-  const onCancel = () => {
-    setState({ ...state, editVisible: false });
-    form.resetFields();
-  };
+  const { provinces, districts, communes, setProvinceId, setDistrictId } = useDivision();
+
+  useEffect(() => {
+    if (defaultProvideId) {
+      setProvinceId(defaultProvideId);
+    }
+    if (defaultDistrictId) {
+      setDistrictId(defaultDistrictId);
+    }
+  }, [defaultProvideId, defaultDistrictId]);
 
   const handleOk = async (values) => {
+    setLoading(true);
     try {
-      setLoading(true);
-
-      const response = await dataService.put(API_PRODUCT(state.update.id), {
+      const response = await dataService.put(API_PROVIDER(state.update.id), {
         ...values,
         id: state.update.id,
       });
@@ -32,31 +48,56 @@ const EditUser = ({ state, setState, list, setList }) => {
       onCancel();
 
       notification.success({
-        message: t('Common_Goods'),
-        description: t('Product_UpdateSuccessDescription'),
+        message: t('Common_Provider'),
+        description: t('Common_UpdateSuccess'),
       });
     } catch (error) {
       console.error(error);
       notification.error({
-        message: t('Common_Goods'),
-        description: t('Product_UpdateErrorDescription'),
+        message: t('Common_Provider'),
+        description: t('Common_UpdateFailure'),
       });
     } finally {
       setLoading(false);
     }
   };
 
+  const onFormValuesChange = ({ province, district }) => {
+    if (province) setProvinceId(province);
+    if (district) setDistrictId(district);
+  };
+
+  const mapOptions = {
+    province: provinces,
+    district: districts,
+    commune: communes,
+    branch: branches,
+  };
+
+  const fields = fieldsModalProvider.map((field) => ({
+    ...field,
+    ...(field.name in mapOptions && { options: mapOptions[field.name] }),
+  }));
+
+  const onCancel = () => {
+    setState({ ...state, editVisible: false });
+    form.resetFields();
+  };
+
   return (
     <ModalCommon
-      title={t('Product_UpdateTitle')}
+      width={1000}
+      title={t('Provider_Update')}
       open={state.editVisible}
       form={form}
       handleOk={handleOk}
-      dataUpdate={state.update}
       onCancel={onCancel}
       loading={loading}
-      textSubmit={t('Common_Save')}
-      fields={fieldsModalProduct}
+      textSubmit={t('Common_Update')}
+      fields={fields}
+      onValuesChange={onFormValuesChange}
+      size="large"
+      dataUpdate={state.update}
     />
   );
 };

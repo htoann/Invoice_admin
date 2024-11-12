@@ -98,7 +98,7 @@ export const menuItems = [
 
   {
     key: routes.users,
-    text: 'Users',
+    text: 'Người dùng',
     to: routes.users,
   },
 ];

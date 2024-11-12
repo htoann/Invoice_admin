@@ -1,24 +1,29 @@
 import { ModalCommon } from '@/components/ModalCommon';
-import { API_PRODUCTS, dataService } from '@/service';
+import { API_PROVIDERS, dataService } from '@/service';
 import { Form, notification } from 'antd';
+import { useAppState } from 'context/AppContext';
+import { useGetOrgStructure } from 'hooks/useGetOrgStructure';
+import { useDivision } from 'hooks/vietnam-division';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { fieldsModalProduct } from '../utils';
+import { fieldsModalProvider } from '../utils';
 
 const CreateUser = ({ state, setState, list, setList }) => {
-  const [loading, setLoading] = useState(false);
-  const [form] = Form.useForm();
   const { t } = useTranslation();
+  const [form] = Form.useForm();
 
-  const onCancel = () => {
-    setState({ ...state, visible: false });
-    form.resetFields();
-  };
+  useGetOrgStructure();
+
+  const { branches } = useAppState();
+
+  const [loading, setLoading] = useState(false);
+
+  const { provinces, districts, communes, setProvinceId, setDistrictId } = useDivision();
 
   const createNew = async (data) => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await dataService.post(API_PRODUCTS, data);
+      const response = await dataService.post(API_PROVIDERS, data);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -34,28 +39,65 @@ const CreateUser = ({ state, setState, list, setList }) => {
       setList([newItem, ...list]);
       onCancel();
       notification.success({
-        message: t('Common_Goods'),
-        description: t('Product_CreateSuccess'),
+        message: t('Common_Provider'),
+        description: t('Common_CreateSuccess'),
       });
       form.resetFields();
     } else {
       notification.error({
-        message: t('Common_Goods'),
-        description: t('Product_CreateError'),
+        message: t('Common_Provider'),
+        description: t('Common_CreateFailure'),
       });
     }
   };
 
+  const onFormValuesChange = (changedValues) => {
+    const { province, district } = changedValues;
+
+    if (province) {
+      setProvinceId(province);
+      form.setFieldsValue({
+        district: undefined,
+        commune: undefined,
+      });
+    } else if (district) {
+      setDistrictId(district);
+      form.setFieldsValue({
+        commune: undefined,
+      });
+    }
+  };
+
+  const mapOptions = {
+    province: provinces,
+    district: districts,
+    commune: communes,
+    branch: branches,
+  };
+
+  const fields = fieldsModalProvider.map((field) => ({
+    ...field,
+    ...(field.name in mapOptions && { options: mapOptions[field.name] }),
+  }));
+
+  const onCancel = () => {
+    setState({ ...state, visible: false });
+    form.resetFields();
+  };
+
   return (
     <ModalCommon
-      title={t('Product_Create_Title')}
+      width={1000}
       open={state.visible}
+      title={t('Thêm người dùng')}
       form={form}
       handleOk={handleOk}
       onCancel={onCancel}
       loading={loading}
       textSubmit={t('Common_Create')}
-      fields={fieldsModalProduct}
+      fields={fields}
+      onValuesChange={onFormValuesChange}
+      size="large"
     />
   );
 };
