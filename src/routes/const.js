@@ -20,12 +20,4 @@ export const routes = {
   categoryProduct: 'danh-muc/hang-hoa',
   categoryExpense: 'danh-muc/khoan-muc-chi-phi',
   categoryTaxPayer: 'danh-muc/thong-tin-thue',
-
-  report: 'bao-cao',
-  reportInvoiceSummary: 'bao-cao/tong-hop-mua-vao-ban-ra',
-  reportInvoiceAdjustment: 'bao-cao/bang-ke-thay-the-dieu-chinh',
-  reportExportData: 'bao-cao/xuat-du-lieu',
-  reportPriceCheck: 'bao-cao/kiem-tra-don-gia',
-  reportInvoiceReconciliation: 'bao-cao/doi-chieu-chenh-lech-hoa-don',
-  reportSupplementTax: 'bao-cao/bo-sung-doi-chieu-to-khai-thue-theo-tung-lan-kiem-tra',
 };

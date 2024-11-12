@@ -22,9 +22,6 @@ const Providers = lazy(() => import('@/pages/category/c-pages/providers/Provider
 const Organization = lazy(() => import('@/pages/category/c-pages/organization/Organization'));
 const TaxPayer = lazy(() => import('@/pages/category/c-pages/tax-payer/TaxPayer'));
 
-const InvoiceAdjustment = lazy(() => import('@/pages/report/pages/invoice-adjustment'));
-const InvoiceReconciliation = lazy(() => import('@/pages/report/pages/invoice-reconciliation'));
-
 const NotFound = lazy(() => import('@/container/pages/NotFound'));
 
 const Index = React.memo(() => {
@@ -52,16 +49,6 @@ const Index = React.memo(() => {
     { path: routes.categoryProduct, element: <Products />, permission: PERMISSIONS.PRODUCT_VIEW },
     { path: routes.categoryTaxPayer, element: <TaxPayer />, permission: PERMISSIONS.TAXPAYER_VIEW },
 
-    {
-      path: routes.reportInvoiceAdjustment,
-      element: <InvoiceAdjustment />,
-      permission: PERMISSIONS.REPORT_INVOICE_ADJUSTMENT,
-    },
-    {
-      path: routes.reportInvoiceReconciliation,
-      element: <InvoiceReconciliation />,
-      permission: PERMISSIONS.REPORT_INVOICE_RECONCILIATION,
-    },
     { path: '*', element: <NotFound /> },
   ];
 

@@ -67,7 +67,3 @@ export const API_PROVINCES = '/locations/provinces';
 export const API_DISTRICTS = '/locations/districts';
 
 export const API_COMMUNES = '/locations/communes';
-
-// Report
-export const API_INVOICE_ADJUSTMENT = '/hdttdc_reports/';
-export const API_INVOICE_ADJUSTMENT_EXPORT = '/hdttdc_reports/excel/';
