@@ -22,6 +22,8 @@ const Providers = lazy(() => import('@/pages/category/c-pages/providers/Provider
 const Organization = lazy(() => import('@/pages/category/c-pages/organization/Organization'));
 const TaxPayer = lazy(() => import('@/pages/category/c-pages/tax-payer/TaxPayer'));
 
+const Users = lazy(() => import('@/pages/users/index'));
+
 const NotFound = lazy(() => import('@/container/pages/NotFound'));
 
 const Index = React.memo(() => {
@@ -48,6 +50,8 @@ const Index = React.memo(() => {
     { path: routes.categoryCustomer, element: <Customers />, permission: PERMISSIONS.CUSTOMER_VIEW },
     { path: routes.categoryProduct, element: <Products />, permission: PERMISSIONS.PRODUCT_VIEW },
     { path: routes.categoryTaxPayer, element: <TaxPayer />, permission: PERMISSIONS.TAXPAYER_VIEW },
+
+    { path: routes.users, element: <Users /> },
 
     { path: '*', element: <NotFound /> },
   ];

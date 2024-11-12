@@ -1,21 +1,16 @@
 import { routes } from '@/routes/const';
 import {
-  UilAnalytics,
-  UilBalanceScale,
-  UilBook,
   UilBox,
   UilBuilding,
-  UilClipboardAlt,
   UilCreateDashboard,
   UilEnvelope,
-  UilExport,
   UilFileInfoAlt,
   UilInvoice,
   UilMoneyBill,
-  UilSearchAlt,
   UilSync,
   UilTable,
   UilTruck,
+  UilUser,
   UilUserPlus,
   UilUsersAlt,
 } from '@tooni/iconscout-unicons-react';
@@ -100,6 +95,12 @@ export const menuItems = [
     ],
     permission: PERMISSIONS.CATEGORY_MENU,
   },
+
+  {
+    key: routes.users,
+    text: 'Users',
+    to: routes.users,
+  },
 ];
 
 export const getMenuItem = (label, key, icon, children, type) => {
@@ -132,11 +133,5 @@ export const iconMap = {
   [routes.categoryExpense]: <UilMoneyBill />,
   [routes.categoryTaxPayer]: <UilFileInfoAlt />,
 
-  [routes.report]: <UilClipboardAlt />,
-  [routes.reportInvoiceSummary]: <UilAnalytics />,
-  [routes.reportInvoiceAdjustment]: <UilClipboardAlt />,
-  [routes.reportExportData]: <UilExport />,
-  [routes.reportPriceCheck]: <UilSearchAlt />,
-  [routes.reportInvoiceReconciliation]: <UilBalanceScale />,
-  [routes.reportSupplementTax]: <UilBook />,
+  [routes.users]: <UilUser />,
 };

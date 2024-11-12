@@ -20,4 +20,6 @@ export const routes = {
   categoryProduct: 'danh-muc/hang-hoa',
   categoryExpense: 'danh-muc/khoan-muc-chi-phi',
   categoryTaxPayer: 'danh-muc/thong-tin-thue',
+
+  users: 'users',
 };
