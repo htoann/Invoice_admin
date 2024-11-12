@@ -20,7 +20,7 @@ import {
   UilUsersAlt,
 } from '@tooni/iconscout-unicons-react';
 import i18next from 'i18next';
-import { getI18n, PERMISSIONS } from '../../utils';
+import { PERMISSIONS } from '../../utils';
 
 export const menuItems = [
   {
@@ -99,49 +99,6 @@ export const menuItems = [
       },
     ],
     permission: PERMISSIONS.CATEGORY_MENU,
-  },
-  {
-    key: routes.report,
-    text: 'Common_Report',
-    subMenu: [
-      {
-        key: routes.reportInvoiceSummary,
-        text: getI18n('Report_InvoiceSummary'),
-        to: '#',
-        permission: PERMISSIONS.REPORT_INVOICE_SUMMARY,
-      },
-      {
-        key: routes.reportInvoiceAdjustment,
-        text: i18next.t('Invoice_ReplacementAdjustmentList'),
-        to: routes.reportInvoiceAdjustment,
-        permission: PERMISSIONS.REPORT_INVOICE_ADJUSTMENT,
-      },
-      {
-        key: routes.reportExportData,
-        text: getI18n('Report_ExportAccountingData'),
-        to: '#',
-        permission: PERMISSIONS.EXPORT_DATA,
-      },
-      {
-        key: routes.reportPriceCheck,
-        text: getI18n('Report_PriceCheck'),
-        to: '#',
-        permission: PERMISSIONS.REPORT_PRICE_CHECK,
-      },
-      {
-        key: routes.reportInvoiceReconciliation,
-        text: getI18n('Report_InvoiceReconciliation'),
-        to: routes.reportInvoiceReconciliation,
-        permission: PERMISSIONS.REPORT_INVOICE_RECONCILIATION,
-      },
-      {
-        key: routes.reportSupplementTax,
-        text: getI18n('Report_TaxSupplementCheck'),
-        to: '#',
-        permission: PERMISSIONS.SUPPLEMENT_TAX_REPORT,
-      },
-    ],
-    permission: PERMISSIONS.REPORT_MENU,
   },
 ];
 
